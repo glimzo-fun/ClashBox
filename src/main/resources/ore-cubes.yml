@@ -1,0 +1,76 @@
+# ============================================================
+#   ClashBox — Ore Cubes Configuration
+#   ore-cubes.yml
+# ============================================================
+#
+# This file stores all registered 6×6×6 ore cube definitions.
+# Use in-game commands to manage cubes — do not edit manually
+# unless you know the exact min-corner coordinates.
+#
+# COMMANDS (requires clashbox.admin permission):
+#   /cb cube pos1                          — Mark corner 1 at your feet
+#   /cb cube setpos <id> <type>            — Register cube from pos1 to your current pos
+#   /cb cube set <id> <type> <x1y1z1 x2y2z2> — Register from explicit coords
+#   /cb cube remove <id>                   — Unregister a cube
+#   /cb cube list                          — List all cubes + time until next refill
+#   /cb cube fill <id|all>                 — Force-refill immediately
+#   /cb cube interval <seconds>            — Change refill interval (restarts task)
+#   /cb cube save                          — Save to this file
+#   /cb cube load                          — Reload from this file
+#
+# CUBE TYPES (use these exact names in commands):
+#   COAL, IRON, GOLD, REDSTONE, LAPIS, DIAMOND, EMERALD, DARK_OAK
+#
+# REFILL BEHAVIOUR:
+#   Every refill-interval-seconds, each cube is fully reshuffled:
+#     85% ore material  (e.g. DIAMOND_ORE)
+#     15% block material (e.g. DIAMOND_BLOCK)
+#   Positions are randomised each cycle. Total blocks = 6×6×6 = 216.
+#
+# PROXIMITY NOTIFICATION:
+#   Players within 20 blocks of a cube's center hear the refill sound
+#   and receive a chat notification. Players further away are not notified.
+#
+# BLOCK PROTECTION:
+#   Only the cube's own ore/block material can be mined inside the region.
+#   Any other block (e.g. stone placeholders) is indestructible to players.
+#
+# ─────────────────────────────────────────────────────────────
+
+# How often (in seconds) each cube reshuffles its 216 blocks.
+# Default: 15. Minimum: 5.
+# Change live with: /cb cube interval <seconds>
+refill-interval-seconds: 15
+
+# ─── Cube definitions ────────────────────────────────────────
+# Populated by /cb cube set or /cb cube setpos in-game.
+# Format:
+#
+# cubes:
+#   <id>:
+#     ore-type: DIAMOND          # One of the 8 OreType values
+#     world:    box              # World name (must match your arena world)
+#     min-x:    100              # Lowest X corner of the 6×6×6 region
+#     min-y:    64               # Lowest Y corner
+#     min-z:    200              # Lowest Z corner
+#
+# The plugin always uses the min corner + 6 blocks in each axis.
+# You never need to specify max corners.
+#
+# Example (not active — remove the leading # to use):
+#
+# cubes:
+#   diamond:
+#     ore-type: DIAMOND
+#     world: box
+#     min-x: 100
+#     min-y: 64
+#     min-z: 200
+#   coal:
+#     ore-type: COAL
+#     world: box
+#     min-x: 120
+#     min-y: 64
+#     min-z: 200
+
+cubes: {}

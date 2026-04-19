@@ -1,0 +1,90 @@
+# ============================================================
+#   ClashBox — zones.yml
+#   Per-zone rule configuration for world "box"
+# ============================================================
+#
+# All three zones (outer, mid, core) are configured here.
+# Changes take effect after /cb reload or server restart.
+#
+# Zone geometry (radius + Y range) is also defined here
+# and replaces the zone geometry values in config.yml.
+# ─────────────────────────────────────────────────────────────
+
+zones:
+
+  outer:
+    # ── Geometry ─────────────────────────────────────────────
+    # XZ radius from arena center (0,0)
+    radius: 80
+    y-min: 55
+    y-max: 80
+
+    # ── Combat ───────────────────────────────────────────────
+    pvp: false
+    # Percentage of wallet shards lost on death
+    death-loss-percent: 0.0
+    kill-reward-multiplier: 1.0
+
+    # ── Blocks ───────────────────────────────────────────────
+    # Can players place blocks in this zone?
+    block-placement: false
+    # Can players break blocks in this zone?
+    # (ArenaBlockManager still prevents breaking original arena blocks)
+    block-break: true
+
+    # ── Economy ──────────────────────────────────────────────
+    sell-access: true
+    sell-fee-percent: 0.0
+
+    # ── Survival ─────────────────────────────────────────────
+    fall-damage: true
+    hunger: true
+    mob-spawning: false
+
+    # ── UI ───────────────────────────────────────────────────
+    entry-title: "&a&lOUTER ZONE"
+    entry-subtitle: "&7Safe area — PvP disabled"
+
+  mid:
+    radius: 50
+    y-min: 35
+    y-max: 55
+
+    pvp: true
+    death-loss-percent: 50.0
+    kill-reward-multiplier: 1.5
+
+    block-placement: false
+    block-break: true
+
+    sell-access: true
+    sell-fee-percent: 10.0
+
+    fall-damage: true
+    hunger: true
+    mob-spawning: false
+
+    entry-title: "&e&lMIDDLE ZONE"
+    entry-subtitle: "&7PvP is now &c&lACTIVE"
+
+  core:
+    radius: 25
+    y-min: 10
+    y-max: 35
+
+    pvp: true
+    death-loss-percent: 100.0
+    kill-reward-multiplier: 3.0
+
+    block-placement: false
+    block-break: true
+
+    sell-access: false
+    sell-fee-percent: 0.0
+
+    fall-damage: true
+    hunger: true
+    mob-spawning: false
+
+    entry-title: "&c&l\u26A0 CORE ZONE \u26A0"
+    entry-subtitle: "&7High risk — &cno sell points"

@@ -1,0 +1,227 @@
+# ==============================
+#   ClashBox Configuration
+#   Glimzo Network
+# ==============================
+
+# --- WORLD SETTINGS ---
+world:
+  # The arena world (PvP, ore mining, zones)
+  arena-world-name: "box"
+
+  # The lobby world (where players spawn, NPCs, bank, enchant stores)
+  lobby-world-name: "world"
+
+  # Center of the ARENA (X, Z) — used for zone radius detection
+  center-x: 0
+  center-z: 0
+
+  # Lobby spawn — located in world "world"
+  lobby-spawn:
+    x: 0.5
+    y: 100.0
+    z: 0.5
+    yaw: 0.0
+    pitch: 0.0
+
+  # The pit in the lobby floor that drops players into the arena
+  pit-radius: 5.0
+  pit-entry-y: 95.0
+
+# --- ZONE SETTINGS (in world "box") ---
+zones:
+  outer:
+    radius: 80
+    y-min: 55
+    y-max: 80
+    pvp-enabled: false
+    kill-reward-multiplier: 1.0
+    sell-access: true
+    sell-fee-percent: 0.0
+    death-loss-percent: 0.0
+  mid:
+    radius: 50
+    y-min: 35
+    y-max: 55
+    pvp-enabled: true
+    kill-reward-multiplier: 1.5
+    sell-access: true
+    sell-fee-percent: 10.0
+    death-loss-percent: 50.0
+  core:
+    radius: 25
+    y-min: 10
+    y-max: 35
+    pvp-enabled: true
+    kill-reward-multiplier: 3.0
+    sell-access: false
+    sell-fee-percent: 0.0
+    death-loss-percent: 100.0
+
+# --- ECONOMY ---
+economy:
+  base-kill-reward: 150
+  base-ore-prices:
+    COAL_ORE: 10
+    IRON_ORE: 35
+    GOLD_ORE: 80
+    LAPIS_ORE: 60
+    REDSTONE_ORE: 55
+    DIAMOND_ORE: 300
+    EMERALD_ORE: 500
+
+  ore-zone-multipliers:
+    outer: 1.0
+    mid: 1.8
+    core: 4.0
+
+  bank:
+    default-capacity: 50000
+    deposit-tax-percent: 0.5
+    investment-tiers:
+      7200:   0.03
+      28800:  0.06
+      86400:  0.10
+    max-investment: 100000
+
+  sell-hourly-softcap: 10000
+  sell-softcap-reduction: 0.85
+
+# --- COMBAT ---
+combat:
+  base-kill-reward: 150
+  streak-coin-multiplier-per-kill: 0.10
+  streak-announce-milestones: [3, 5, 8, 12, 20]
+  streak-bounty-threshold: 5
+
+  bounty:
+    base-multiplier: 2.0
+    minimum-value: 500
+    expiry-seconds: 600
+
+  respawn-delay-ticks: 60
+  death-summary-display-ticks: 80
+
+  assist-damage-threshold: 0.15
+  assist-reward-percent: 0.40
+
+# --- ORE REGENERATION (individual nodes, not cubes) ---
+ore-regen:
+  check-interval-ticks: 100
+  outer-regen-min: 30
+  outer-regen-max: 90
+  mid-regen-min: 20
+  mid-regen-max: 60
+  core-regen-min: 10
+  core-regen-max: 40
+
+# --- PORTAL ---
+portal:
+  active-count: 1
+  relocation-interval: 120
+  announce-in-chat: true
+  spawn-locations:
+    - x: 30.5
+      y: 62.0
+      z: 30.5
+    - x: -30.5
+      y: 62.0
+      z: 30.5
+    - x: 30.5
+      y: 62.0
+      z: -30.5
+    - x: -30.5
+      y: 62.0
+      z: -30.5
+    - x: 0.5
+      y: 45.0
+      z: 40.5
+
+# --- EVENTS ---
+events:
+  min-players-to-fire: 3
+
+  supply-drop:
+    enabled: true
+    min-delay-seconds: 480
+    max-delay-seconds: 840
+    claim-radius: 3.0
+    duration-seconds: 120
+
+  vein-burst:
+    enabled: true
+    min-delay-seconds: 180
+    max-delay-seconds: 360
+    ore-count: 20
+    duration-seconds: 50
+
+  bank-raid:
+    enabled: true
+    min-delay-seconds: 9000
+    max-delay-seconds: 12600
+    hold-duration-seconds: 60
+    wallet-steal-percent: 0.03
+    top-targets: 5
+
+# --- PROGRESSION ---
+progression:
+  upgrades:
+    SWORD_LEVEL:
+      max-level: 5
+      costs: [500, 1500, 4000, 10000, 25000]
+    PICKAXE_LEVEL:
+      max-level: 5
+      costs: [300, 900, 2500, 7000, 18000]
+    ARMOR_LEVEL:
+      max-level: 5
+      costs: [800, 2000, 5000, 13000, 30000]
+    BANK_CAPACITY:
+      max-level: 5
+      costs: [1000, 3000, 8000, 20000, 50000]
+      capacity-per-level: 50000
+    CARRY_PROTECTION:
+      max-level: 3
+      costs: [2000, 6000, 15000]
+
+  season:
+    current-season: 1
+    duration-days: 28
+
+# --- UI ---
+ui:
+  scoreboard-update-ticks: 10
+  actionbar-update-ticks: 5
+  colors:
+    primary: "§b"
+    secondary: "§7"
+    highlight: "§e"
+    danger: "§c"
+    success: "§a"
+    prestige: "§d"
+
+# --- TEAMS ---
+teams:
+  max-size: 3
+  invite-expiry-seconds: 60
+  vault-withdraw-require-all-online: true
+
+# ── SELL PRICES ───────────────────────────────────────────────────────────────
+sell-prices:
+  COAL:     8
+  IRON:     25
+  GOLD:     60
+  REDSTONE: 45
+  LAPIS:    50
+  DIAMOND:  250
+  EMERALD:  400
+  LOG:      5
+
+zone-multipliers:
+  mid:  1.8
+  core: 4.0
+
+# ── SELL AREA ─────────────────────────────────────────────────────────────────
+sell-area:
+  x: 0.5
+  y: 100.0
+  z: 10.5
+  radius: 3.0

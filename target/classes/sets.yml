@@ -1,0 +1,276 @@
+# ============================================================
+#   ClashBox — sets.yml
+#   Armor Set definitions: Warrior → Knight → Pirate → Assassin → Eternal
+# ============================================================
+#
+# ALL PIECES ARE LEATHER ARMOR.
+# The leather is automatically dyed to match the set's glass color.
+# You do NOT configure base-material — it is always leather.
+#
+# ENCHANT REFERENCE — use these exact Bukkit names under "enchants":
+# ─────────────────────────────────────────────────────────────────
+#
+# PROTECTION (general):
+#   PROTECTION_ENVIRONMENTAL    — Protection (reduces all damage)
+#
+# PROTECTION (specific):
+#   PROTECTION_FIRE             — Fire Protection
+#   PROTECTION_EXPLOSIONS       — Blast Protection
+#   PROTECTION_PROJECTILE       — Projectile Protection
+#   PROTECTION_FALL             — Feather Falling (boots only in vanilla, but works on all here)
+#
+# OFFENSE / UTILITY:
+#   THORNS                      — Thorns (reflects melee damage back)
+#   OXYGEN                      — Respiration (helmet — underwater breathing)
+#   WATER_WORKER                — Aqua Affinity (helmet — faster underwater mining)
+#
+# DURABILITY:
+#   DURABILITY                  — Unbreaking
+#
+# LEVELS:
+#   Any integer from 1 to 200 (or higher) is supported.
+#   The unsafe=true flag bypasses Minecraft's vanilla level cap.
+#   Examples:
+#     PROTECTION_ENVIRONMENTAL: 5    — vanilla max
+#     PROTECTION_ENVIRONMENTAL: 20   — high custom level
+#     PROTECTION_ENVIRONMENTAL: 200  — extreme future endgame
+#
+# TRADE CHAIN per piece:
+#   Warrior  — Shards directly (starter set, no glass grind)
+#   Knight   — 12x Yellow Glass  → 1x Knight Glass  → 3x Knight Glass  + Warrior piece
+#   Pirate   — 12x Magenta Glass → 1x Pirate Glass  → 3x Pirate Glass  + Knight piece
+#   Assassin — 12x Blue Glass    → 1x Assassin Glass → 3x Assassin Glass + Pirate piece
+#   Eternal  — 12x Black Glass   → 1x Eternal Glass → 3x Eternal Glass + Assassin piece
+#
+# glass-material format: MATERIAL:damage_value
+#   Yellow  = STAINED_GLASS:4
+#   Magenta = STAINED_GLASS:2
+#   Blue    = STAINED_GLASS:11
+#   Black   = STAINED_GLASS:15
+# ─────────────────────────────────────────────────────────────
+
+armor-stands: {}
+npc-locations: {}
+
+sets:
+
+  # ─── 1★ Warrior Set — Red — Starter ────────────────────────
+  warrior:
+    name: "Warrior"
+    star: 1
+    color: "&c"             # Red — matches red glass and red leather dye
+    tier-required: 1
+    starter: true
+    shard-cost: 5000        # Cost per piece in Shards (starter only)
+
+    set-bonus:
+      effect: DAMAGE_RESISTANCE   # Resistance I when all 4 pieces worn
+      amplifier: 0                # 0 = level I, 1 = level II, etc.
+      description: "Resistance I while wearing the full set"
+
+    pieces:
+      helmet:
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 3   # Protection III
+          DURABILITY: 2                 # Unbreaking II
+      chestplate:
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 3
+          DURABILITY: 2
+      leggings:
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 3
+          DURABILITY: 2
+      boots:
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 3
+          DURABILITY: 2
+          PROTECTION_FALL: 2            # Feather Falling II
+
+  # ─── 2★ Knight Set — Yellow — Outer Zone glass ─────────────
+  knight:
+    name: "Knight"
+    star: 2
+    color: "&e"             # Yellow — matches yellow glass and yellow leather dye
+    tier-required: 3
+    starter: false
+    upgrade-from: warrior
+
+    glass-material: "STAINED_GLASS:4"  # Yellow stained glass (data value 4)
+    glass-drop-zone:
+      - OUTER                           # Yellow glass drops in Outer Zone only
+
+    intermediate-glass-cost: 12   # 12x raw Yellow Glass → 1x Knight Glass
+    intermediate-piece-cost: 3    # 3x Knight Glass + 1x Warrior piece → Knight piece
+
+    set-bonus:
+      effect: INCREASE_DAMAGE   # Strength I when all 4 pieces worn
+      amplifier: 0
+      description: "Strength I while wearing the full set"
+
+    pieces:
+      helmet:
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 5   # Protection V
+          DURABILITY: 3                 # Unbreaking III
+          OXYGEN: 1                     # Respiration I (underwater breathing)
+      chestplate:
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 5
+          DURABILITY: 3
+          THORNS: 1                     # Thorns I
+      leggings:
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 5
+          DURABILITY: 3
+      boots:
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 5
+          DURABILITY: 3
+          PROTECTION_FALL: 3            # Feather Falling III
+
+  # ─── 3★ Pirate Set — Magenta — Outer + Mid Zone glass ──────
+  pirate:
+    name: "Pirate"
+    star: 3
+    color: "&d"             # Magenta — matches magenta glass and pink leather dye
+    tier-required: 6
+    starter: false
+    upgrade-from: knight
+
+    glass-material: "STAINED_GLASS:2"  # Magenta stained glass (data value 2)
+    glass-drop-zone:
+      - OUTER                           # Magenta glass drops in Outer and Mid Zones
+      - MID
+
+    intermediate-glass-cost: 12
+    intermediate-piece-cost: 3
+
+    set-bonus:
+      effect: SPEED           # Speed I when all 4 pieces worn
+      amplifier: 0
+      description: "Speed I while wearing the full set"
+
+    pieces:
+      helmet:
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 7   # Protection VII
+          PROTECTION_PROJECTILE: 4      # Projectile Protection IV
+          DURABILITY: 3
+          OXYGEN: 2                     # Respiration II
+      chestplate:
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 7
+          PROTECTION_FIRE: 4            # Fire Protection IV
+          DURABILITY: 3
+          THORNS: 2                     # Thorns II
+      leggings:
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 7
+          PROTECTION_EXPLOSIONS: 4      # Blast Protection IV
+          DURABILITY: 3
+          THORNS: 1
+      boots:
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 7
+          DURABILITY: 3
+          PROTECTION_FALL: 4            # Feather Falling IV
+          THORNS: 1
+
+  # ─── 4★ Assassin Set — Blue — Mid Zone glass ───────────────
+  assassin:
+    name: "Assassin"
+    star: 4
+    color: "&9"             # Blue — matches blue glass and blue leather dye
+    tier-required: 10
+    starter: false
+    upgrade-from: pirate
+
+    glass-material: "STAINED_GLASS:11"  # Blue stained glass (data value 11)
+    glass-drop-zone:
+      - MID                              # Blue glass drops in Mid Zone only
+
+    intermediate-glass-cost: 12
+    intermediate-piece-cost: 3
+
+    set-bonus:
+      effect: INCREASE_DAMAGE   # Strength II when all 4 pieces worn
+      amplifier: 1              # 1 = level II
+      description: "Strength II while wearing the full set"
+
+    pieces:
+      helmet:
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 10   # Protection X
+          PROTECTION_PROJECTILE: 6
+          DURABILITY: 3
+          OXYGEN: 3                      # Respiration III
+          WATER_WORKER: 1                # Aqua Affinity I
+      chestplate:
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 10
+          PROTECTION_FIRE: 6
+          DURABILITY: 3
+          THORNS: 3                      # Thorns III
+      leggings:
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 10
+          PROTECTION_EXPLOSIONS: 6
+          DURABILITY: 3
+          THORNS: 2
+      boots:
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 10
+          DURABILITY: 3
+          PROTECTION_FALL: 5             # Feather Falling V (beyond vanilla max of 4)
+          THORNS: 2
+
+  # ─── 5★ Eternal Set — Black — Core Zone glass ──────────────
+  eternal:
+    name: "Eternal"
+    star: 5
+    color: "&8"             # Dark gray — matches black glass and near-black leather dye
+    tier-required: 15
+    starter: false
+    upgrade-from: assassin
+
+    glass-material: "STAINED_GLASS:15"  # Black stained glass (data value 15)
+    glass-drop-zone:
+      - CORE                             # Black glass drops in Core Zone only (rarest)
+
+    intermediate-glass-cost: 12
+    intermediate-piece-cost: 3
+
+    set-bonus:
+      effect: REGENERATION    # Regeneration I when all 4 pieces worn
+      amplifier: 0
+      description: "Regeneration I while wearing the full set"
+
+    pieces:
+      helmet:
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 20   # Protection XX (beyond vanilla cap — uses unsafe apply)
+          PROTECTION_PROJECTILE: 10
+          PROTECTION_FIRE: 8
+          DURABILITY: 5
+          OXYGEN: 3
+          WATER_WORKER: 1
+      chestplate:
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 20
+          PROTECTION_FIRE: 10
+          PROTECTION_EXPLOSIONS: 8
+          DURABILITY: 5
+          THORNS: 5                      # Thorns V
+      leggings:
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 20
+          PROTECTION_EXPLOSIONS: 10
+          DURABILITY: 5
+          THORNS: 4
+      boots:
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 20
+          DURABILITY: 5
+          PROTECTION_FALL: 10            # Feather Falling X
+          THORNS: 3

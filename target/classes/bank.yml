@@ -1,0 +1,131 @@
+# ============================================================
+#   ClashBox — bank.yml
+#   All economy, shard, bank, savings, investment & loan
+#   settings live here. Reload with /cb reload
+# ============================================================
+
+# ── SHARD CURRENCY ──────────────────────────────────────────
+shards:
+  # Display name shown in chat, GUIs, and scoreboards
+  name: "Shards"
+  # Symbol shown next to amounts  e.g.  ◆ 1,250
+  symbol: "◆"
+  # 1.8 item material for the physical shard item
+  material: "QUARTZ"
+  # Custom display name on the item (supports & color codes)
+  item-name: "&b&l✦ Shard"
+  # Lore shown on the item
+  item-lore:
+    - "&7ClashBox currency."
+    - "&7Cannot be used outside the arena."
+
+# ── WALLET ──────────────────────────────────────────────────
+wallet:
+  # % of wallet lost on death in each zone (0 = no loss)
+  death-loss-percent:
+    outer: 0.0
+    mid: 50.0
+    core: 100.0
+  # Softcap: after earning this much per hour, ore sell price is reduced
+  hourly-softcap: 10000
+  softcap-reduction: 0.85   # sell at 85% of normal price after cap
+
+# ── SAVINGS BANK ────────────────────────────────────────────
+savings:
+  # Passive interest earned per hour while offline (or online)
+  # Applied on login based on elapsed time since last seen
+  interest-rate-per-hour: 0.001   # 0.1%/hr = ~2.4%/day
+  # Default maximum savings capacity (can be upgraded)
+  default-capacity: 50000
+  # Deposit tax (% deducted on every deposit)
+  deposit-tax-percent: 0.5
+  # Each BANK_CAPACITY upgrade adds this much capacity
+  capacity-per-upgrade-level: 50000
+
+# ── INVESTMENT VAULT ────────────────────────────────────────
+investment:
+  max-amount: 500000
+  # Tiers: duration in seconds -> return rate (e.g. 0.03 = 3%)
+  tiers:
+    7200:   0.03    # 2 hours  →  3%
+    28800:  0.06    # 8 hours  →  6%
+    86400:  0.10    # 24 hours → 10%
+    259200: 0.15    # 72 hours → 15%
+  # If true, on maturity the vault auto-reinvests for the same duration
+  auto-reinvest: false
+
+# ── LOAN SYSTEM ─────────────────────────────────────────────
+loans:
+  enabled: true
+  # Minimum loan amount
+  minimum: 500
+  # Hard cap regardless of credit score
+  maximum: 500000
+  # Interest compounds every N seconds (21600 = 6 hours)
+  compound-interval-seconds: 21600
+  # % of wallet lost as penalty if player dies in Core while loan is active
+  death-penalty-percent: 10.0
+  # Whether deposit to savings is blocked while loan is active (anti-loop)
+  block-deposit-while-indebted: true
+  # How loan borrow limit is calculated:
+  #   "bank"    → % of current bank balance (old simple mode)
+  #   "lifetime"→ % of (bank + lifetime shards earned) / 2  (recommended)
+  borrow-cap-mode: "lifetime"
+
+# ── CREDIT SCORE ────────────────────────────────────────────
+credit:
+  enabled: true
+  # Starting score for new players
+  default-score: 500
+  # Min / max possible score
+  min-score: 300
+  max-score: 850
+  # Score changes (positive = gain, negative = lose)
+  events:
+    loan-repaid-on-time:  +25
+    loan-repaid-early:    +10
+    weekly-active-player: +5
+    missed-interest-payment: -15
+    season-end-unpaid:    -75
+    death-penalty-triggered: -20
+  # Tier thresholds — each tier defines max-borrow-percent and interest-rate-per-compound
+  # interest-rate-per-compound: charged every compound-interval-seconds
+  tiers:
+    - min-score: 300
+      max-score: 449
+      max-borrow-percent: 0.20
+      interest-rate-per-compound: 0.12   # 12% every 6h
+      label: "&cPoor"
+    - min-score: 450
+      max-score: 599
+      max-borrow-percent: 0.35
+      interest-rate-per-compound: 0.10
+      label: "&eAverage"
+    - min-score: 600
+      max-score: 749
+      max-borrow-percent: 0.55
+      interest-rate-per-compound: 0.08
+      label: "&aGood"
+    - min-score: 750
+      max-score: 849
+      max-borrow-percent: 0.75
+      interest-rate-per-compound: 0.06
+      label: "&bExcellent"
+    - min-score: 850
+      max-score: 850
+      max-borrow-percent: 0.90
+      interest-rate-per-compound: 0.05
+      label: "&d&lPerfect"
+
+# ── TRANSACTION LOG ─────────────────────────────────────────
+transactions:
+  # How many entries to store per player
+  max-history: 50
+  # Types logged (set false to skip logging that type)
+  log-ore-sells: true
+  log-kill-rewards: true
+  log-deposits: true
+  log-withdrawals: true
+  log-investments: true
+  log-loan-events: true
+  log-interest: true

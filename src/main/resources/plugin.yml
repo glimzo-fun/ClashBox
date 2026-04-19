@@ -1,0 +1,43 @@
+name: ClashBox
+version: 1.0.0-SNAPSHOT
+main: net.glimzo.clashbox.core.ClashBoxPlugin
+api-version: "1.13"
+description: Glimzo Network - ClashBox PvP Gamemode
+author: pikashrey
+softdepend:
+  - GlimzoCore
+  - ZNPCsPlus
+
+commands:
+  clashbox:
+    description: ClashBox admin command
+    aliases: [cb]
+    permission: clashbox.admin
+  bank:
+    description: Open your bank
+    permission: clashbox.player
+  stats:
+    description: View your ClashBox stats
+    permission: clashbox.player
+  leaderboard:
+    description: View the ClashBox leaderboard
+    aliases: [lb, top]
+    permission: clashbox.player
+  bounty:
+    description: Manage bounties
+    permission: clashbox.player
+  team:
+    description: Team management
+    permission: clashbox.player
+  deposit:
+    description: Deposit a cheque held in your main hand
+    aliases: [dep]
+    permission: clashbox.player
+
+permissions:
+  clashbox.admin:
+    description: Full ClashBox admin access
+    default: op
+  clashbox.player:
+    description: Basic ClashBox player access
+    default: true
